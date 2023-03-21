@@ -100,3 +100,56 @@ void frame(int image[MAX_H][MAX_W], int &h, int &w){
     //which contains the white frame image, & h + w of image.
 	writeImage("taskD.pgm", output, h, w);
 }
+
+//task E: @param: 2D integer array of size MAX_H and MAX_W
+//and two int references, height and width.
+
+void scale(int image[MAX_H][MAX_W], int &h, int &w){
+    //declare a new 2D integer array of size MAX_H and MAX_W
+    //it'll store the scaled image.
+	int output[MAX_H][MAX_W];
+	for(int row = 0; row < h; row++) { //loop thru each pixel in the OG image
+        //Double the size of the input image
+		for(int col = 0; col < w; col++) {
+			output[row*2][col*2] = image[row][col];
+			output[row*2+1][col*2] = image[row][col];
+			output[row*2][col*2+1] = image[row][col];
+			output[row*2+1][col*2+1] = image[row][col];
+		}
+	}
+	//call writeImage func & pass thru filename of scaled image, output array
+    //which contains the scaled image, & h + w of image.
+	writeImage("taskE.pgm", output, h*2, w*2);
+}
+
+//task F: @param: 2D integer array of size MAX_H and MAX_W
+//and two int references, height and width.
+
+void pixelate(int image[MAX_H][MAX_W], int &h, int &w){
+    //declare a new 2D integer array of size MAX_H and MAX_W
+    //it'll store the pixelated image.
+	int output[MAX_H][MAX_W];
+	for(int row = 0; row < h; row+=2) { //iterate thru every other row
+		for(int col = 0; col < w; col+=2) { //iterate thru every other column
+            //calculate the sum of the pixel values in a 2x2 block of pixels in the input image
+			int sum = 0;
+			sum += image[row][col];
+			sum += image[row+1][col];
+			sum += image[row][col+1];
+			sum += image[row+1][col+1];
+            //calculates the average pixel value in the 2x2 block by dividing
+            //the sum of the 4 pixel values by 4
+			int avg = sum/4;
+            //sets the pixel values in the output image to the average pixel value calculated
+            //in the previous step. replacing each 2x2 block of pixels with a single pixel with the
+            //average color.
+			output[row][col] = avg;
+			output[row+1][col] = avg;
+			output[row][col+1] = avg;
+			output[row+1][col+1] = avg;
+		}
+	}
+    //call writeImage func & pass thru filename of pixelated image, output array
+    //which contains the pixelated image, & h + w of image.
+	writeImage("taskF.pgm", output, h, w);
+}
