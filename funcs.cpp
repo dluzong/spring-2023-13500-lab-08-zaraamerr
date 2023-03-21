@@ -29,5 +29,20 @@ void invert(int img[MAX_H][MAX_W], int& h, int& w) {
     writeImage("taskA.pgm", output, h, w);
 }
 
+void invert_half(int image[MAX_H][MAX_W], int &h, int &w){
+	int output[MAX_H][MAX_W];
+    //Invert half the colors
+	for(int row = 0; row < h; row++) {
+		for(int col = 0; col < w; col++) {
+			if(col > w/2){
+				output[row][col] = 255 - image[row][col];
+			}
+			else{
+				output[row][col] = image[row][col];
+			}
+		}
+	}
+	writeImage("taskB.pgm", output, h, w);
+}
 
 
