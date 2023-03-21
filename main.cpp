@@ -14,6 +14,10 @@ int main() {
     invert(img, h, w);
     //Call half invert function to invert the image
     invert_half(img, h, w);
+    //Call box function
+    box(img, h, w);
+    //Call frame function
+    frame (img, h, w);
 
     return 0;
 }
