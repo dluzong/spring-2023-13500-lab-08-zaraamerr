@@ -6,7 +6,7 @@
 
 * GitHub username: zaraamerr
 
-* Notes:
+* Notes: I used inImage.pgm from Maryash's lab.
 
 
   
