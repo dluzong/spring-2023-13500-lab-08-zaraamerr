@@ -86,6 +86,15 @@ void frame(int image[MAX_H][MAX_W], int &h, int &w){
     //borders of the frame
 	for(int col = w/4; col < w-w/4; col++){
 		output[h/4][col] = 255;
+		output[h-h/4][col] = 255;
+	}
+	for(int row = h/4; row < h-h/4; row++){
+		output[row][w/4] = 255;
+		output[row][w-w/4] = 255;
+	}
+	/* ORIGINAL CODE
+	for(int col = w/4; col < w-w/4; col++){
+		output[h/4][col] = 255;
 	}
 	for(int col = w/4; col < w-w/4; col++){
 		output[h-h/4][col] = 255;
@@ -96,6 +105,8 @@ void frame(int image[MAX_H][MAX_W], int &h, int &w){
 	for(int row = h/4; row < h-h/4; row++){
 		output[row][w-w/4] = 255;
 	}
+	*/
+	
 	//call writeImage func & pass thru filename of white frame image, output array
     //which contains the white frame image, & h + w of image.
 	writeImage("taskD.pgm", output, h, w);
@@ -132,11 +143,16 @@ void pixelate(int image[MAX_H][MAX_W], int &h, int &w){
 	for(int row = 0; row < h; row+=2) { //iterate thru every other row
 		for(int col = 0; col < w; col+=2) { //iterate thru every other column
             //calculate the sum of the pixel values in a 2x2 block of pixels in the input image
+			int sum = image[row][col] + image[row+1][col] + image[row][col+1] + image[row+1][col+1];
+			
+			/* ORIGINAL CODE
 			int sum = 0;
 			sum += image[row][col];
 			sum += image[row+1][col];
 			sum += image[row][col+1];
 			sum += image[row+1][col+1];
+			*/
+			
             //calculates the average pixel value in the 2x2 block by dividing
             //the sum of the 4 pixel values by 4
 			int avg = sum/4;
